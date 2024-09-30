@@ -65,12 +65,12 @@ function SearchDialog({ cityId }: { cityId?: string }) {
 	}
 
 	return (
-		<>
+		<div className='flex flex-col md:flex-row w-full gap-2'>
+			<CountryList />
 			<div className="flex gap-2 w-full relative z-10">
 				<IoIosCloseCircleOutline 
 					className={`cursor-pointer absolute right-4 top-2 font-bold text-2xl text-gray-500 ${search ? 'visible' : 'invisible'}`}
 					onClick={() => setSearch('')} />
-				<CountryList />
 				<input 
 				type="text" 
 				value={search} 
@@ -107,7 +107,7 @@ function SearchDialog({ cityId }: { cityId?: string }) {
 			{cities.length > 0 && (
 				<div className="fixed inset-0 bg-black opacity-30 z-0"></div>
 			)}			
-		</>
+		</div>
 	)
 }
 

@@ -29,19 +29,17 @@ function CountryList() {
 		router.push(`${pathname}?${newSearchParams.toString()}`);
 	}
 
-	return (
-		<div>
-			<select 
-				className="p-2 pl-4 pr-4 border rounded-md w-48"
-				value={country}
-				onChange={handleCountryChange}
-			>
-				<option value="all">Anywhere</option>
-				{countries.map((country, index) => (
-					<option key={index} value={country.cca2}>{country.name.common}</option>
-				))}
-			</select>
-		</div>
+	return (		
+		<select 
+			className="p-2 pl-4 pr-4 border rounded-md w-full md:w-48"
+			value={country}
+			onChange={handleCountryChange}
+		>
+			<option value="all">Anywhere</option>
+			{countries.map((country, index) => (
+				<option key={index} value={country.cca2}>{country.name.common}</option>
+			))}
+		</select>		
 	)
 }
 
