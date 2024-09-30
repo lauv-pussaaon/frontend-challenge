@@ -6,6 +6,13 @@ export interface City {
 	weather: WeatherData;
 }
 
+export interface Country {
+	name: {
+		common: string;
+	}
+	cca2: string;
+}
+
 export interface WeatherData {
 	coord: {
 		lon: number;
