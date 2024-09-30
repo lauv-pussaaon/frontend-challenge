@@ -48,7 +48,8 @@ function CityWeather({ cityId, weather, unit }: { cityId: string, weather: Weath
 						height={84}
 					/>
 					<p className='text-7xl font-bold'>{weather.main.temp.toFixed(0)}{unitToSymbol(unit)}</p>
-					<p className='capitalize text-sm'>{weather.weather[0].description}</p>
+					<p className='capitalize text-sm font-medium'>{weather.weather[0].main}</p>
+					<p className='capitalize text-xs text-gray-500'>({weather.weather[0].description})</p>
 			</div>			
 		</div>
 	)
