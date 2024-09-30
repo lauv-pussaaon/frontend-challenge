@@ -74,7 +74,7 @@ function SelectedWeathers() {
 										width={48} 
 										height={48} />}
 								</p>
-								<p>{city.weather.main.temp.toFixed(0)}{unitToSymbol(unit)}</p>
+								<p className='w-10 text-center'>{city.weather.main.temp.toFixed(0)}{unitToSymbol(unit)}</p>
 								<p>
 									<IoIosRemoveCircle 
 										className='cursor-pointer text-gray-500'
