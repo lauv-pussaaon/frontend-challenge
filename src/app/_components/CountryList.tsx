@@ -1,0 +1,48 @@
+'use client'
+
+import React, { useEffect, useState } from 'react'
+import { getCountries } from '../_services/apiPlace';
+import { usePathname, useRouter, useSearchParams } from 'next/navigation';
+
+function CountryList() {
+
+	const [countries, setCountries] = useState<any[]>([]);
+	const searchParams = useSearchParams();
+	const country = searchParams.get('country') || 'all';
+	const pathname = usePathname();
+	const router = useRouter();
+
+	useEffect(() => {
+		const fetchCountries = async () => {
+			const countries = await getCountries();
+			setCountries(countries.sort((a, b) => a.name.common.localeCompare(b.name.common)));
+			console.log(countries);
+		}
+		fetchCountries();
+	}, []);
+	
+	const handleCountryChange = (event: React.ChangeEvent<HTMLSelectElement>) => {		
+		const selectedCountry = event.target.value;
+
+		const newSearchParams = new URLSearchParams(searchParams);
+		newSearchParams.set('country', selectedCountry);
+		router.push(`${pathname}?${newSearchParams.toString()}`);
+	}
+
+	return (
+		<div>
+			<select 
+				className="p-2 pl-4 pr-4 border rounded-md w-48"
+				value={country}
+				onChange={handleCountryChange}
+			>
+				<option value="all">Anywhere</option>
+				{countries.map((country, index) => (
+					<option key={index} value={country.cca2}>{country.name.common}</option>
+				))}
+			</select>
+		</div>
+	)
+}
+
+export default CountryList
