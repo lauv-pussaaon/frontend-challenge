@@ -18,13 +18,14 @@ import { computeCityWeatherURL } from '../_lib/navigationUtil';
 function SelectedCities () {
 
 	const { selectedCities, removeCity } = useSelectedCities();
-	const [isLoading, setIsLoading] = useState(true);	
+	const [isLoading, setIsLoading] = useState(false);	
 	const [cities, setCities] = useState<City[]>([]);
 	const unit = useSearchParams().get('unit') || 'celsius';
 	const country = useSearchParams().get('country') || 'all';
 
 	useEffect(() => {
 		const fetchCities = async () => {
+			setIsLoading(true);
 			const cities = await Promise.all(selectedCities.map(async (city: City) => {				
 				const weather: WeatherData = await getWeatherByCoords({ 
 					lat: city.center[1].toString(), 
