@@ -1,5 +1,5 @@
 import axios from "axios";
-import { WeatherData } from "../_lib/models";
+import { ForecastData, WeatherData } from "../_lib/models";
 import { unitToMetric } from "../_lib/temperatureUtil";
 
 export type WeatherSearchParams = {
