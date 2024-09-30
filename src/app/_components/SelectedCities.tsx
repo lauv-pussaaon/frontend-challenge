@@ -67,9 +67,9 @@ function SelectedCities () {
 							lon: city.center[0].toString(),
 							unit: unit,
 							country: country
-						})}>	
+						})}>
 							<div 
-								className='flex gap-2 md:gap-4 p-4 border-b border-gray-300 items-center cursor-pointer'>
+								className='flex gap-2 md:gap-4 p-4 border-b items-center cursor-pointer shadow-md'>
 								<p className='font-bold flex-1'>{city.place_name}</p>
 								<p>
 									{moment.utc().add(city.weather.timezone, 'seconds').format('YYYY-MM-DD HH:mm')}
