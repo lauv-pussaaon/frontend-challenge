@@ -1,7 +1,6 @@
 'use client'
 
 import moment from 'moment-timezone';
-import Link from 'next/link';
 import Image from 'next/image';
 import React, { useEffect, useState } from 'react'
 
@@ -10,6 +9,8 @@ import { useSelectedCities } from '../_context/CitiesContext';
 import { IoIosRemoveCircle } from "react-icons/io";
 import { getWeatherByCoords } from '../_services/apiWeather';
 import { openWeatherIconUrl } from '../_lib/constants';
+import { useSearchParams } from 'next/navigation';
+import { unitToSymbol } from '../_lib/temperatureUtil';
 
 
 function SelectedCities () {
@@ -17,13 +18,15 @@ function SelectedCities () {
 	const { selectedCities, removeCity } = useSelectedCities();
 	const [isLoading, setIsLoading] = useState(true);	
 	const [cities, setCities] = useState<City[]>([]);
+	const unit = useSearchParams().get('unit') || 'celsius';
 
 	useEffect(() => {
 		const fetchCities = async () => {
 			const cities = await Promise.all(selectedCities.map(async (city: City) => {				
 				const weather: WeatherData = await getWeatherByCoords({ 
 					lat: city.center[1].toString(), 
-					lon: city.center[0].toString()
+					lon: city.center[0].toString(),
+					unit: unit
 				});
 				city.weather = weather;
 				return city;
@@ -33,7 +36,7 @@ function SelectedCities () {
 			setIsLoading(false);
 		}
 		fetchCities()
-	}, [selectedCities]);
+	}, [selectedCities, unit]);
 
 	if (isLoading) {
 		return <div className='text-gray-500 text-center'>Loading Today Weather. Anytime Now...</div>
@@ -68,7 +71,7 @@ function SelectedCities () {
 									width={48} 
 									height={48} />}
 							</p>
-							<p className='w-10 text-center'>{city.weather.main.temp.toFixed(0)}&deg;</p>
+							<p className='w-10 text-center'>{city.weather.main.temp.toFixed(0)}{unitToSymbol(unit)}</p>
 							<p>
 								<IoIosRemoveCircle 
 									className='cursor-pointer text-gray-500'

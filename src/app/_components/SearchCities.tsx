@@ -17,6 +17,7 @@ function SearchCities({ cityId }: { cityId?: string }) {
 	const [search, setSearch] = useState('');
 	const { addCity } = useSelectedCities();
 	const router = useRouter();	
+	const unit = useSearchParams().get('unit') || 'celsius';
 
 	useEffect(() => {
 		const fetchCities = async () => {
@@ -33,7 +34,8 @@ function SearchCities({ cityId }: { cityId?: string }) {
 	const handleAddCity = async (city: City) => {
 		const weather: WeatherData = await getWeatherByCoords({ 
 			lat: city.center[1].toString(), 
-			lon: city.center[0].toString()
+			lon: city.center[0].toString(),
+			unit: unit
 		});
 		city.weather = weather;
 		addCity(city);
