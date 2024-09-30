@@ -26,9 +26,9 @@ async function page({ params, searchParams }: { params: { id: string }, searchPa
 				<div className='flex gap-4 flex-1 justify-end'><SearchCities cityId={cityId} /></div>	
 			</div>
 			<div className='flex justify-end w-full'><TemperatureUnitOptions /></div>
-			<div className='border-b pb-8'><CityWeather cityId={cityId} weather={weather} unit={weatherSearchParams.unit} /></div>			
-			<div className='border-b pb-8'><Forecast forecasts={weather.forecasts} unit={weatherSearchParams.unit} /></div>
-			<div className='border-b pb-8'><WeatherDetail weather={weather} /></div>
+			<div className='p-4 pb-8 card shadow-md'><CityWeather cityId={cityId} weather={weather} unit={weatherSearchParams.unit} /></div>			
+			<div className='p-4 pb-8 card shadow-md'><Forecast forecasts={weather.forecasts} unit={weatherSearchParams.unit} /></div>
+			<div className='p-4 pb-8 card shadow-md'><WeatherDetail weather={weather} /></div>
 		</div>
 	)
 }
