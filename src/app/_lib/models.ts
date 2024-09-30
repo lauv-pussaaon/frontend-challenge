@@ -3,9 +3,6 @@ export interface City {
 	place_name: string;
 	text: string;
 	center: [number, number]; // [longitude, latitude]
-	zip: string;
-	zip_code: string;
-	zip_code_type: string;
 	weather: WeatherData;
 }
 
@@ -20,7 +17,6 @@ export interface WeatherData {
 		description: string;
 		icon: string;
 	}[];
-	base: string;
 	main: {
 		temp: number;
 		feels_like: number;
@@ -44,13 +40,6 @@ export interface WeatherData {
 		'1h': number;
 	};
 	dt: number;
-	sys: {
-		type: number;
-		id: number;
-		country: string;
-		sunrise: number;
-		sunset: number;
-	};
 	timezone: number;
 	id: number;
 	name: string;
@@ -86,9 +75,6 @@ export interface ForecastData {
 	};
 	snow: {
 		'1h': number;
-	};
-	sys: {
-		pod: string;
 	};
 	dt_txt: string;
 }

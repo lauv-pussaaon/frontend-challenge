@@ -12,6 +12,7 @@ import { useSearchParams } from 'next/navigation';
 import { unitToSymbol } from '../_lib/temperatureUtil';
 import { getWeatherByCoords } from '../_services/apiWeather';
 import { openWeatherIconUrl } from '../_lib/constants';
+import { computeCityWeatherURL } from '../_lib/navigationUtil';
 
 
 function SelectedWeathers() {
@@ -32,7 +33,7 @@ function SelectedWeathers() {
 				city.weather = weather;
 				return city;
 			}))
-			console.log('cities', cities);
+			
 			setCities(cities);
 			setIsLoading(false);
 		}
@@ -53,15 +54,12 @@ function SelectedWeathers() {
 		removeCity(city)
 	}
 
-	const computeCityWeatherURL = (city: City) => {
-		return `/city/${city.id}?lat=${city.center[1]}&lon=${city.center[0]}&unit=${unit}&country=${country}`;
-	}
 	return (
 		<>
 			<ul className="w-full">
 				{cities && cities.map((city: City) => (
 					<li key={city.id}>
-						<Link href={computeCityWeatherURL(city)}>						
+						<Link href={computeCityWeatherURL(city, country, unit)}>						
 							<div 
 								className='flex gap-2 md:gap-4 p-4 border-b border-gray-300 items-center cursor-pointer'>
 								<p className='font-bold flex-1'>{city.place_name}</p>

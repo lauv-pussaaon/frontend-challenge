@@ -15,8 +15,7 @@ function CountryList() {
 	useEffect(() => {
 		const fetchCountries = async () => {
 			const countries = await getCountries();
-			setCountries(countries.sort((a, b) => a.name.common.localeCompare(b.name.common)));
-			console.log(countries);
+			setCountries(countries.sort((a, b) => a.name.common.localeCompare(b.name.common)));			
 		}
 		fetchCountries();
 	}, []);

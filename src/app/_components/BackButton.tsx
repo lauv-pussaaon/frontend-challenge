@@ -11,9 +11,7 @@ function BackButton() {
 
 	return (
 		<Link href={{ pathname: '/', query: { unit: unit, country: country } }}>
-			<p className='text-blue-500 p-2 rounded-md cursor-pointer'>
-				&lt; Back
-			</p>
+			<p className='text-blue-500 p-2 rounded-md cursor-pointer'>&lt; Back</p>
 		</Link>
 	)
 }

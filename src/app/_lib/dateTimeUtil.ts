@@ -21,10 +21,6 @@ export function formatDate (dateTimeStr: string, timezone: string = 'Asia/Bangko
 	return moment.tz(dateTimeStr, timezone).format(displayFormat);
 }
 
-export function formatTime (dateTimeStr: string, timezone: string = 'Asia/Bangkok', displayFormat: string = 'HH:mm') {
-	return moment.tz(dateTimeStr, timezone).format(displayFormat);
-}
-
 export const offsetToTimezone = (offset: number): string => {
 	const hours = Math.floor(offset / 3600);
 	const minutes = Math.abs(offset % 3600 / 60);

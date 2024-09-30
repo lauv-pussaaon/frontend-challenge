@@ -10,6 +10,7 @@ import { useSelectedCities } from '../_context/CitiesContext';
 import { getWeatherByCoords } from '../_services/apiWeather';
 import { getCitiesByName, getCitiesByZip } from '../_services/apiPlace';
 import CountryList from './CountryList';
+import { computeCityWeatherURL } from '../_lib/navigationUtil';
 
 function SearchDialog({ cityId }: { cityId?: string }) {
 
@@ -40,9 +41,7 @@ function SearchDialog({ cityId }: { cityId?: string }) {
 			}
 		}
 		fetchCities();
-	}, [search])
-
-	
+	}, [search])	
 
 	const handleAddCity = async (city: City) => {
 		const weather: WeatherData = await getWeatherByCoords({ lat: city.center[1].toString(), lon: city.center[0].toString(), unit: unit });
@@ -50,7 +49,7 @@ function SearchDialog({ cityId }: { cityId?: string }) {
 		addCity(city);
 		setSearch('');
 		if (cityId) {
-			router.push(`/city/${city.id}?lat=${city.center[1]}&lon=${city.center[0]}`);
+			router.push(computeCityWeatherURL(city, country, unit));
 		}		
 	}
 
