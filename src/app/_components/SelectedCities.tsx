@@ -11,6 +11,8 @@ import { getWeatherByCoords } from '../_services/apiWeather';
 import { openWeatherIconUrl } from '../_lib/constants';
 import { useSearchParams } from 'next/navigation';
 import { unitToSymbol } from '../_lib/temperatureUtil';
+import Link from 'next/link';
+import { computeCityWeatherURL } from '../_lib/navigationUtil';
 
 
 function SelectedCities () {
@@ -19,6 +21,7 @@ function SelectedCities () {
 	const [isLoading, setIsLoading] = useState(true);	
 	const [cities, setCities] = useState<City[]>([]);
 	const unit = useSearchParams().get('unit') || 'celsius';
+	const country = useSearchParams().get('country') || 'all';
 
 	useEffect(() => {
 		const fetchCities = async () => {
@@ -57,27 +60,35 @@ function SelectedCities () {
 			<ul className="w-full">
 				{cities && cities.map((city: City) => (
 					<li key={city.id}>				
-						<div 
-							className='flex gap-2 md:gap-4 p-4 border-b border-gray-300 items-center cursor-pointer'>
-							<p className='font-bold flex-1'>{city.place_name}</p>
-							<p>
-								{moment.utc().add(city.weather.timezone, 'seconds').format('YYYY-MM-DD HH:mm')}
-							</p>
-							<p>
-								{city.weather.weather[0].icon && 
-								<Image 
-									src={`${openWeatherIconUrl}${city.weather.weather[0].icon}.png`} 
-									alt={city.weather.weather[0].description} 										
-									width={48} 
-									height={48} />}
-							</p>
-							<p className='w-10 text-center'>{city.weather.main.temp.toFixed(0)}{unitToSymbol(unit)}</p>
-							<p>
-								<IoIosRemoveCircle 
-									className='cursor-pointer text-gray-500'
-									onClick={(e) => { handleRemoveCity(e, city) }} />
-							</p>
-						</div>
+						<Link href={computeCityWeatherURL({
+							id: city.id,
+							lat: city.center[1].toString(),
+							lon: city.center[0].toString(),
+							unit: unit,
+							country: country
+						})}>	
+							<div 
+								className='flex gap-2 md:gap-4 p-4 border-b border-gray-300 items-center cursor-pointer'>
+								<p className='font-bold flex-1'>{city.place_name}</p>
+								<p>
+									{moment.utc().add(city.weather.timezone, 'seconds').format('YYYY-MM-DD HH:mm')}
+								</p>
+								<p>
+									{city.weather.weather[0].icon && 
+									<Image 
+										src={`${openWeatherIconUrl}${city.weather.weather[0].icon}.png`} 
+										alt={city.weather.weather[0].description} 										
+										width={48} 
+										height={48} />}
+								</p>
+								<p className='w-10 text-center'>{city.weather.main.temp.toFixed(0)}{unitToSymbol(unit)}</p>
+								<p>
+									<IoIosRemoveCircle 
+										className='cursor-pointer text-gray-500'
+										onClick={(e) => { handleRemoveCity(e, city) }} />
+								</p>
+							</div>
+						</Link>
 					</li>
 				))}
 			</ul>

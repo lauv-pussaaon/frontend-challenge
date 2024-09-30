@@ -60,7 +60,13 @@ function SearchCities ({ cityId }: { cityId?: string }) {
 		
 		const isCityView = !!cityId;		
 		if (isCityView) {
-			router.push(computeCityWeatherURL(city, unit, country));
+			router.push(computeCityWeatherURL({
+				id: city.id,
+				lat: city.center[1].toString(),
+				lon: city.center[0].toString(),
+				unit: unit,
+				country: country
+			}));
 		}		
 	}
 

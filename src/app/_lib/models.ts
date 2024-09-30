@@ -51,4 +51,37 @@ export interface WeatherData {
 	id: number;
 	name: string;
 	cod: number;
+	forecasts: ForecastData[];
+}
+
+export interface ForecastData {
+	dt: number;
+	main: {
+		temp: number;
+		feels_like: number;
+		temp_min: number;
+		temp_max: number;
+	};
+	weather: {
+		id: number;
+		main: string;
+		description: string;
+		icon: string;
+	}[];
+	clouds: {
+		all: number;
+	}
+	wind: {
+		speed: number;
+		deg: number;
+	};
+	visibility: number;
+	pop: number;
+	rain: {
+		'1h': number;
+	};
+	snow: {
+		'1h': number;
+	};
+	dt_txt: string;
 }

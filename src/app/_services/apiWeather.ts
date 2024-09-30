@@ -14,3 +14,10 @@ export async function getWeatherByCoords (params: WeatherSearchParams): Promise<
 	const response = await axios.get(url + `&lat=${params.lat}&lon=${params.lon}&units=${unitToMetric(params.unit)}`);
 	return response.data
 }
+
+export async function getForecast (params: WeatherSearchParams): Promise<ForecastData[]> {
+	const url = `https://api.openweathermap.org/data/2.5/forecast?appid=${process.env.NEXT_PUBLIC_WEATHER_API_KEY}`;
+
+	const response = await axios.get(url + `&lat=${params.lat}&lon=${params.lon}&units=${unitToMetric(params.unit)}`);
+	return response.data.list;
+}
