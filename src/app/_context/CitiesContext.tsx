@@ -33,7 +33,7 @@ export const CitiesContextProvider = ({ children }: { children: React.ReactNode 
 	};
 
 	const removeCity = (city: City) => {
-		setSelectedCities(selectedCities.filter(c => c !== city));
+		setSelectedCities(selectedCities.filter(c => c.id !== city.id));
 	};
 
 	const getCityById = (id: string): City | undefined => {		

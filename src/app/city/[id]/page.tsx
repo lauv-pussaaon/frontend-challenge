@@ -1,7 +1,6 @@
 import React from 'react'
 import CityWeather from 'src/app/_components/city/CityWeather';
 import { getForecast, getWeatherByCoords } from 'src/app/_services/apiWeather';
-import { WeatherData } from 'src/app/_lib/models';
 import Forecast from 'src/app/_components/city/Forecast';
 import WeatherDetail from 'src/app/_components/city/WeatherDetail';
 import BackButton from 'src/app/_components/BackButton';

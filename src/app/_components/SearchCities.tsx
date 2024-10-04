@@ -19,7 +19,7 @@ function SearchCities ({ cityId }: { cityId?: string }) {
 	const { addCity, getCityById } = useSelectedCities();
 	const router = useRouter();	
 	const city = cityId ? getCityById(cityId) : null;
-	const unit = useSearchParams().get('unit') || 'celsius';	
+	const unit = useSearchParams().get('unit') || 'celsius';
 	const country = useSearchParams().get('country') || 'all';
 
 	useEffect(() => {
@@ -43,7 +43,7 @@ function SearchCities ({ cityId }: { cityId?: string }) {
 	const fetchCitiesByZIP = async (zipCode: string): Promise<City[]> => {
 		const [citiesByName, citiesByZIP] = await Promise.all([
 			getCitiesByName(search, country),
-			getCitiesByZip(search, country)
+			getCitiesByZip(zipCode, country)
 		]);
 		return [...citiesByName, ...citiesByZIP];
 	}

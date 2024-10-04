@@ -33,6 +33,7 @@ function CountrySelection () {
 			className="p-2 pl-4 pr-4 border rounded-md w-full md:w-48"
 			value={country}
 			onChange={handleCountryChange}
+			role="option-country"
 		>
 			<option value="all">Anywhere</option>
 			{countries.map((country, index) => (
